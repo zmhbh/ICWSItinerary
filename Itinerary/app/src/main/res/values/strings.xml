@@ -3,4 +3,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="browse_program">Program</string>
+    <string name="title_activity_program">Program</string>
+    <string name="title_activity_itinerary">Itinerary</string>
+    <string name="title_activity_icwsinfo">ICWSInfo</string>
+    <string name="title_activity_venue_map">VenueMap</string>
+    <string name="title_activity_city_map">CityMap</string>
+    <string name="title_activity_post_event">PostEvent</string>
 </resources>
