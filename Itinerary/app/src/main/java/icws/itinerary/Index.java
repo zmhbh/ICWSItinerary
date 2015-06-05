@@ -1,16 +1,17 @@
 package icws.itinerary;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
+import android.app.Activity;
 import intents.ClickInterface;
 import intents.IntentFactory;
 
 
-public class Index extends ActionBarActivity {
+public class Index extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +46,23 @@ public class Index extends ActionBarActivity {
     }
     // click itinerary button
     public void goItinerary(View v){
-
+        ClickInterface click = IntentFactory.goToNext(this, Itinerary.class,null,null);
     }
     // click icws info button
     public void goICWSInfo(View v){
-
+        ClickInterface click = IntentFactory.goToNext(this, ICWSInfo.class,null,null);
     }
     // click venue map button
     public void goVenueMap(View v){
-
+        ClickInterface click = IntentFactory.goToNext(this, VenueMap.class,null,null);
     }
     // click city map button
     public void goCityMap(View v){
-
+        ClickInterface click = IntentFactory.goToNext(this,CityMap.class,null,null);
     }
     //click post event button
     public void goPostEvent(View v){
-
+        ClickInterface click = IntentFactory.goToNext(this, PostEvent.class,null,null);
     }
     //click setting button
     public void goSetting (View v){

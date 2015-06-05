@@ -19,13 +19,31 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/textView_cityMap">
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            class="com.google.android.gms.maps.MapFragment"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/textView_cityMap"
+        android:layout_alignParentEnd="false"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/my_custom_background"
+        android:id="@+id/mapView"
+        android:padding="5dp">
+
+        <fragment
+            android:name="com.google.android.gms.maps.MapFragment"
             android:id="@+id/map"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            />
+
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Route"
+        android:id="@+id/button_route"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="goGoogleMaps"/>
 
 </RelativeLayout>
