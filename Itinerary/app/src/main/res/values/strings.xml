@@ -10,4 +10,5 @@
     <string name="title_activity_venue_map">VenueMap</string>
     <string name="title_activity_city_map">CityMap</string>
     <string name="title_activity_post_event">PostEvent</string>
+    <string name="title_activity_floor_map">FloorMap</string>
 </resources>

@@ -35,6 +35,10 @@ public class IntentFactory {
             onClick = new GoToPostEvent(packageContext,cl,objectOne,objectTwo);
         }
 
+        else if (cl.equals(FloorMap.class)){
+            onClick = new GoToFloorMap(packageContext,cl,objectOne,objectTwo);
+        }
+
         else {
             //
         }

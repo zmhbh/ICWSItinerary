@@ -4,7 +4,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import intents.ClickInterface;
+import intents.IntentFactory;
 
 public class VenueMap extends ActionBarActivity {
 
@@ -35,4 +38,19 @@ public class VenueMap extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    // show third floor map
+    public void goThirdFloor(View v){
+        ClickInterface click = IntentFactory.goToNext(this, FloorMap.class, 3, null);
+    }
+
+    // show fourth floor map
+    public void goFourthFloor(View v){
+        ClickInterface click = IntentFactory.goToNext(this, FloorMap.class,4,null);
+    }
+
+    // show Seventh floor map
+    public void goSeventhFloor(View v){
+        ClickInterface click = IntentFactory.goToNext(this, FloorMap.class,7,null);
+    }
+
 }
