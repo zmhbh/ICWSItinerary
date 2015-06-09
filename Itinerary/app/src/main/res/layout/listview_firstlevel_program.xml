@@ -16,12 +16,12 @@
         android:padding="15dp" >
 
         <TextView
-            android:id="@+id/textViewName"
+            android:id="@+id/textView1_program"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
-            android:text="TextView"
+            android:text="Saturday, June 27, 2015"
             android:textColor="@android:color/white"
             android:textSize="22sp" />
 

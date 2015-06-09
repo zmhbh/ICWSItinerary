@@ -16,7 +16,7 @@ public class IntentFactory {
         if(cl==null){
 
         }
-        else if (cl.equals(Program.class)){
+        else if (cl.equals(ProgramActivity.class)){
             onClick = new GoToProgram(packageContext,cl,objectOne, objectTwo);
         }
         else if (cl.equals(Itinerary.class)){

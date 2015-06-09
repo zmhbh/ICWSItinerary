@@ -1,7 +1,5 @@
 package icws.itinerary;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,7 +40,7 @@ public class Index extends Activity {
     }
     //click program button
     public void goProgram(View v){
-        ClickInterface click = IntentFactory.goToNext(this, Program.class,null,null);
+        ClickInterface click = IntentFactory.goToNext(this, ProgramActivity.class,null,null);
     }
     // click itinerary button
     public void goItinerary(View v){

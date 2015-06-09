@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Program"
+            android:name=".ProgramActivity"
             android:label="@string/title_activity_program" >
         </activity>
         <activity
