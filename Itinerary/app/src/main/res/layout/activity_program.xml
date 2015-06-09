@@ -15,30 +15,40 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <RadioButton
+    <RadioGroup
+        android:id="@+id/radioView"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View By Time"
-        android:id="@+id/radioButton"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:id="@+id/radioButtonTime"
         android:checked="true"
-        android:textColor="#000000"
-        android:textStyle="bold|italic" />
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View By Room"
-        android:id="@+id/radioButton2"
-        android:checked="false"
         android:layout_below="@+id/textView2"
         android:layout_toRightOf="@+id/radioButton"
         android:layout_toEndOf="@+id/radioButton"
         android:layout_marginLeft="10dp"
         android:textColor="#000000"
         android:textStyle="bold|italic" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View By Room"
+            android:id="@+id/radioButtonRoom"
+            android:checked="false"
+            android:textColor="#000000"
+            android:textStyle="bold|italic"
+            android:layout_alignTop="@+id/scrollView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RadioGroup>
 
     <ScrollView
         android:layout_width="match_parent"

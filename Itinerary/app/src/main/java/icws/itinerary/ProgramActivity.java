@@ -21,12 +21,20 @@ public class ProgramActivity extends Activity {
     boolean isFirstViewClicked=false;
     boolean isSecondViewClicked=false;
 
+    //Radio
+    private RadioGroup radioViewGroup;
+    private RadioButton radioViewButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program);
-        firstLevelLinearLayout = (LinearLayout) findViewById(R.id.linear_listview);
 
+        //Radio Button
+        addListenerOnButton();
+
+        //MultiLevel List View
+        firstLevelLinearLayout = (LinearLayout) findViewById(R.id.linear_listview);
         ArrayList<Session> session1ArrayList = new ArrayList<Session>();
         session1ArrayList.add(new Session("Global Faculty Club Initiative","Room 7.03"));
         session1ArrayList.add(new Session("ICWS Short Paper 1", "Room 7.01"));
@@ -73,12 +81,12 @@ public class ProgramActivity extends Activity {
             linearFirst.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    if(isFirstViewClicked==false){
-                        isFirstViewClicked=true;
+                    if(linear_second.getVisibility()==View.GONE){
+                      //  isFirstViewClicked=true;
                         firstArrow.setBackgroundResource(R.drawable.arw_down);
                         linear_second.setVisibility(View.VISIBLE);
                     }else{
-                        isFirstViewClicked=false;
+                      //  isFirstViewClicked=false;
                         firstArrow.setBackgroundResource(R.drawable.arw_lt);
                         linear_second.setVisibility(View.GONE);
                     }
@@ -112,12 +120,13 @@ public class ProgramActivity extends Activity {
                 linearSecond.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-                        if(isSecondViewClicked==false){
-                            isSecondViewClicked=true;
+
+                        if(linear_third.getVisibility()==View.GONE){
+                           // isSecondViewClicked=true;
                             secondArrow.setBackgroundResource(R.drawable.arw_down);
                             linear_third.setVisibility(View.VISIBLE);
                         }else {
-                            isSecondViewClicked = false;
+                           // isSecondViewClicked = false;
                             secondArrow.setBackgroundResource(R.drawable.arw_lt);
                             linear_third.setVisibility(View.GONE);
                         }
@@ -137,6 +146,17 @@ public class ProgramActivity extends Activity {
 
                     TextView text_sessionType = (TextView) thirdView.findViewById(R.id.textView3_sessionType);
                     TextView text_sesstionRoomTime = (TextView) thirdView.findViewById(R.id.textView3_sessionRoomTime);
+                    CheckBox checkBox = (CheckBox) thirdView.findViewById(R.id.checkBox);
+                    checkBox.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            CheckBox checkbox = (CheckBox) v;
+                            if(checkbox.isChecked())
+                                Toast.makeText(getApplicationContext(),
+                                        "Checked box ID: "+v.getId(),Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
                     final String sessionType = programArrayList.get(i).getTimeSlotArrayList().get(j).getSessionArrayList().get(k).getSessionType();
                     final String sessionRoomTime = programArrayList.get(i).getTimeSlotArrayList().get(j).getSessionArrayList().get(k).getSessionRoomTime();
                     text_sessionType.setText(sessionType);
@@ -169,5 +189,20 @@ public class ProgramActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addListenerOnButton(){
+        radioViewGroup=(RadioGroup)findViewById(R.id.radioView);
+        radioViewGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+               if(checkedId==2131492972) // View by time
+                Toast.makeText(getApplicationContext(),
+                        "View by Time checkedId: "+checkedId,Toast.LENGTH_SHORT).show();
+                else  //View by room
+                   Toast.makeText(getApplicationContext(),
+                           "View by Room checkedId: "+checkedId,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
