@@ -12,6 +12,8 @@ import intents.ClickInterface;
 import intents.IntentFactory;
 import model.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+
 import android.view.*;
 import android.widget.*;
 
@@ -21,10 +23,17 @@ public class ProgramActivity extends Activity {
     private ArrayList<TimeSlot> timeSlot1ArrayList;
     private ArrayList<TimeSlot> timeSlot2ArrayList;
     private LinearLayout firstLevelLinearLayout;
-
     //Radio
     private RadioGroup radioViewGroup;
-    private RadioButton radioViewButton;
+   // private RadioButton radioViewButton;
+
+    private static LinkedHashMap<String, Program> itinerary = new LinkedHashMap<String, Program>();
+
+    private String[] category_program={"Saturday, June 27, 2015","Sunday, June 28, 2015", "Monday, June 29, 2015",
+                                        "Tuesday, June 30, 2015","Wednesday, July 1, 2015","Thursday, July 2, 2015"};
+    //private String[] category_timeslot=
+    private String[] category_timeslot_saturday={"9:00-10:00","10:00-10:15","10:15-11:15","11:15-11:20","11:20-12:20"};
+    private String[]  category_timeslot_sunday={"8:15-9:15","9:15-9:40","9:40-11:30","11:30-12:30","12:30-13:30","13:30-14:40"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
