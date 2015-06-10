@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.content.*;
+import intents.ClickInterface;
+import intents.IntentFactory;
 import model.*;
 import java.util.ArrayList;
 import android.view.*;
@@ -69,14 +72,14 @@ public class ProgramActivity extends Activity {
             final ImageView firstArrow = (ImageView) firstLevelView.findViewById(R.id.imageFirstArrow);
             final LinearLayout linear_second = (LinearLayout) firstLevelView.findViewById(R.id.linear_second);
 
-            if(isFirstViewClicked==false){
+//            if(isFirstViewClicked==false){
                 linear_second.setVisibility(View.GONE);
                 firstArrow.setBackgroundResource(R.drawable.arw_lt);
-            }
-            else {
-                linear_second.setVisibility(View.VISIBLE);
-                firstArrow.setBackgroundResource(R.drawable.arw_down);
-            }
+//            }
+//            else {
+//                linear_second.setVisibility(View.VISIBLE);
+//                firstArrow.setBackgroundResource(R.drawable.arw_down);
+//            }
 
             linearFirst.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -109,24 +112,24 @@ public class ProgramActivity extends Activity {
                 final ImageView secondArrow = (ImageView) secondView.findViewById(R.id.imageSecondArrow);
                 final LinearLayout linear_third = (LinearLayout) secondView.findViewById(R.id.linear_third);
 
-                if(isSecondViewClicked==false){
+//                if(isSecondViewClicked==false){
                     linear_third.setVisibility(View.GONE);
                     secondArrow.setBackgroundResource(R.drawable.arw_lt);
-                }else{
-                    linear_third.setBackgroundResource(View.VISIBLE);
-                    secondArrow.setBackgroundResource(R.drawable.arw_down);
-                }
+//                }else{
+//                    linear_third.setBackgroundResource(View.VISIBLE);
+//                    secondArrow.setBackgroundResource(R.drawable.arw_down);
+//                }
 
                 linearSecond.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
-                        if(linear_third.getVisibility()==View.GONE){
-                           // isSecondViewClicked=true;
+                        if (linear_third.getVisibility() == View.GONE) {
+                            // isSecondViewClicked=true;
                             secondArrow.setBackgroundResource(R.drawable.arw_down);
                             linear_third.setVisibility(View.VISIBLE);
-                        }else {
-                           // isSecondViewClicked = false;
+                        } else {
+                            // isSecondViewClicked = false;
                             secondArrow.setBackgroundResource(R.drawable.arw_lt);
                             linear_third.setVisibility(View.GONE);
                         }
@@ -157,10 +160,25 @@ public class ProgramActivity extends Activity {
 
                         }
                     });
+                    final RelativeLayout linearThird = (RelativeLayout) thirdView.findViewById(R.id.linearThird);
                     final String sessionType = programArrayList.get(i).getTimeSlotArrayList().get(j).getSessionArrayList().get(k).getSessionType();
                     final String sessionRoomTime = programArrayList.get(i).getTimeSlotArrayList().get(j).getSessionArrayList().get(k).getSessionRoomTime();
                     text_sessionType.setText(sessionType);
                     text_sesstionRoomTime.setText(sessionRoomTime);
+
+                    linearThird.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Intent intent = new Intent(v.getContext(),SessionDetail.class);
+                            startActivity(intent);
+                            //ClickInterface click = IntentFactory.goToNext(getApplicationContext(),SessionDetail.class,null,null);
+
+                        }
+                    });
+
+
+
                     linear_third.addView(thirdView);
                 }
                 linear_second.addView(secondView);

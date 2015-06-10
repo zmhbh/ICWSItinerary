@@ -39,6 +39,14 @@ public class IntentFactory {
             onClick = new GoToFloorMap(packageContext,cl,objectOne,objectTwo);
         }
 
+        else if (cl.equals(SessionDetail.class)){
+            onClick = new GoToSessionDetail(packageContext,cl, objectOne,objectTwo);
+        }
+
+        else if (cl.equals(PaperDetail.class)){
+            onClick = new GoToPaperDetail(packageContext, cl, objectOne, objectTwo);
+        }
+
         else {
             //
         }

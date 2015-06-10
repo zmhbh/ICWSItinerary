@@ -60,6 +60,14 @@
             android:name=".FloorMap"
             android:label="@string/title_activity_floor_map" >
         </activity>
+        <activity
+            android:name=".SessionDetail"
+            android:label="@string/title_activity_session_detail" >
+        </activity>
+        <activity
+            android:name=".PaperDetail"
+            android:label="@string/title_activity_paper_detail" >
+        </activity>
     </application>
 
 </manifest>
