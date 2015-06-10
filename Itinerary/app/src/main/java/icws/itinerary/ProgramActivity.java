@@ -21,8 +21,6 @@ public class ProgramActivity extends Activity {
     private ArrayList<TimeSlot> timeSlot1ArrayList;
     private ArrayList<TimeSlot> timeSlot2ArrayList;
     private LinearLayout firstLevelLinearLayout;
-    boolean isFirstViewClicked=false;
-    boolean isSecondViewClicked=false;
 
     //Radio
     private RadioGroup radioViewGroup;
@@ -172,7 +170,6 @@ public class ProgramActivity extends Activity {
 
                             Intent intent = new Intent(v.getContext(),SessionDetail.class);
                             startActivity(intent);
-                            //ClickInterface click = IntentFactory.goToNext(getApplicationContext(),SessionDetail.class,null,null);
 
                         }
                     });

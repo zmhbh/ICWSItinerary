@@ -15,9 +15,8 @@ UaaS: Software Update as a Service for the IaaS Cloud(#8365) (SCC2015-4065)
 public class Paper {
     private String title; //UaaS: Software Update as a Service for the IaaS Cloud
     private String author; //Kai Liu, Deqing Zou, Hai Jin
-
     private String uniqueID;   //SCC2015-4065
-    private String paperAbstract;
+    private String paperAbstract;   //
     private String simplifiedAffiliation; //Huazhong University of Science and Technology  China
     private String authorAffiliation;//Kai Liu (Huazhong University of Science and Technology  China)
                                         //Deqing Zou (Huazhong University of Science and Technology China)
