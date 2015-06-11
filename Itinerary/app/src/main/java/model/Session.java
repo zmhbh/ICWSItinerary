@@ -1,27 +1,52 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+import java.util.Set;
 /**
  * Created by zmhbh on 6/8/15.
  */
 public class Session {
-    private String sessionType;
+    private String sessionTitle;
     private String sessionName;
     private String sessionRoomTime;
+    private String sessionChair;
+    private LinkedHashMap<String, Paper> sessionContent;
 
 
-    public Session (String sessionType, String sessionRoomTime){
+
+    public Session(String sessionName) {
+        this.sessionName = sessionName;
+        sessionContent = new LinkedHashMap<String, Paper>();
+    }
+
+
+    public void populateSession(String sessionTitle, String sessionRoomTime, String sessionChair) {
+        this.sessionTitle=sessionTitle;
+        this.sessionRoomTime=sessionRoomTime;
+        this.sessionChair=sessionChair;
+    }
+
+    public void populatePapers(Paper[] papers){
+        for(Paper paper:papers) {
+            sessionContent.put(paper.getUniqueID(), paper);
+        }
+    }
+
+    public Session(String sessionTitle, String sessionRoomTime) {
         super();
 
-        this.sessionType=sessionType;
-        this.sessionRoomTime=sessionRoomTime;
+        this.sessionTitle = sessionTitle;
+        this.sessionRoomTime = sessionRoomTime;
     }
 
-    public String getSessionType() {
-        return sessionType;
+    public String getSessionTitle() {
+        return sessionTitle;
     }
 
-    public void setSessionType(String sessionType) {
-        this.sessionType = sessionType;
+    public void setSessionTitle(String sessionTitle) {
+        this.sessionTitle = sessionTitle;
     }
 
     public String getSessionName() {
@@ -39,5 +64,18 @@ public class Session {
     public void setSessionName(String sessionName) {
         this.sessionName = sessionName;
     }
+
+    public String getSessionChair() {
+        return sessionChair;
+    }
+
+    public void setSessionChair(String sessionChair) {
+        this.sessionChair = sessionChair;
+    }
+
+    public Set<Entry<String, Paper>> getPaperEntrySet(){
+        return sessionContent.entrySet();
+    }
+
 
 }

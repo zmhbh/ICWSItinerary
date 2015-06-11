@@ -12,12 +12,16 @@ import android.content.*;
 import intents.ClickInterface;
 import intents.IntentFactory;
 import model.*;
+import utility.ContentContainer;
+import utility.ContentFiller;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import android.view.*;
 import android.widget.*;
+
+import java.util.Map.Entry;
 
 public class ProgramActivity extends Activity {
 
@@ -29,6 +33,7 @@ public class ProgramActivity extends Activity {
     private RadioGroup radioViewGroup;
     // private RadioButton radioViewButton;
 
+/*
     private static LinkedHashMap<String, Program> itinerary = new LinkedHashMap<String, Program>();
 
     private String[] category_program = {"Saturday, June 27, 2015", "Sunday, June 28, 2015", "Monday, June 29, 2015",
@@ -36,6 +41,7 @@ public class ProgramActivity extends Activity {
     //private String[] category_timeslot=
     private String[] category_timeslot_saturday = {"9:00-10:00", "10:00-10:15", "10:15-11:15", "11:15-11:20", "11:20-12:20"};
     private String[] category_timeslot_sunday = {"8:15-9:15", "9:15-9:40", "9:40-11:30", "11:30-12:30", "12:30-13:30", "13:30-14:40"};
+*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +51,15 @@ public class ProgramActivity extends Activity {
         //Radio Button
         addListenerOnButton();
 
-        //MultiLevel List View
+        // for test
+
+        ContentFiller contentFiller = new ContentFiller();
+        // test initialization
+        contentFiller.populateContainer();
+
         firstLevelLinearLayout = (LinearLayout) findViewById(R.id.linear_listview);
+      /*  //MultiLevel List View
+
         ArrayList<Session> session1ArrayList = new ArrayList<Session>();
         session1ArrayList.add(new Session("Global Faculty Club Initiative", "Room 7.03"));
         session1ArrayList.add(new Session("ICWS Short Paper 1", "Room 7.01"));
@@ -68,10 +81,11 @@ public class ProgramActivity extends Activity {
 
         programArrayList = new ArrayList<Program>();
         programArrayList.add(new Program("Saturday, June 27, 2015", timeSlot1ArrayList));
-        programArrayList.add(new Program("Sunday, june 28, 2015", timeSlot2ArrayList));
+        programArrayList.add(new Program("Sunday, june 28, 2015", timeSlot2ArrayList));*/
 
         // first Level
-        for (int i = 0; i < programArrayList.size(); i++) {
+        //for (int i = 0; i < programArrayList.size(); i++) {
+        for (Entry<String, Program> programEntry : contentFiller.getProgramEntrySet()) {
             LayoutInflater inflater = null;
             inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View firstLevelView = inflater.inflate(R.layout.listview_firstlevel_program, null);
@@ -100,85 +114,90 @@ public class ProgramActivity extends Activity {
             });
 
 
-            final String programName = programArrayList.get(i).getProgramDetail();
+            // final String programName = programArrayList.get(i).getProgramDetail();
+            String programName = programEntry.getKey();
             textVew1Program.setText(programName);
 
             // second level
-            for (int j = 0; j < programArrayList.get(i).getTimeSlotArrayList().size(); j++) {
+            //  for (int j = 0; j < programArrayList.get(i).getTimeSlotArrayList().size(); j++) {
+            for (Entry<String, TimeSlot> timeSlotEntry : programEntry.getValue().getTimeSlotEntrySet()){
                 LayoutInflater inflater2 = null;
-                inflater2 = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View secondView = inflater2.inflate(R.layout.listview_secondlevel_timeslot, null);
+            inflater2 = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View secondView = inflater2.inflate(R.layout.listview_secondlevel_timeslot, null);
 
-                TextView textView2TimeRoom = (TextView) secondView.findViewById(R.id.textView2_viewTimeRoom);
-                final RelativeLayout linearSecond = (RelativeLayout) secondView.findViewById(R.id.linearSecond);
-                final ImageView secondArrow = (ImageView) secondView.findViewById(R.id.imageSecondArrow);
-                final LinearLayout linear_third = (LinearLayout) secondView.findViewById(R.id.linear_third);
-                //initialization
-                linear_third.setVisibility(View.GONE);
-                secondArrow.setBackgroundResource(R.drawable.arw_lt);
+            TextView textView2TimeRoom = (TextView) secondView.findViewById(R.id.textView2_viewTimeRoom);
+            final RelativeLayout linearSecond = (RelativeLayout) secondView.findViewById(R.id.linearSecond);
+            final ImageView secondArrow = (ImageView) secondView.findViewById(R.id.imageSecondArrow);
+            final LinearLayout linear_third = (LinearLayout) secondView.findViewById(R.id.linear_third);
+            //initialization
+            linear_third.setVisibility(View.GONE);
+            secondArrow.setBackgroundResource(R.drawable.arw_lt);
 
-                // click event
-                linearSecond.setOnClickListener(new View.OnClickListener() {
+            // click event
+            linearSecond.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (linear_third.getVisibility() == View.GONE) {
+                        secondArrow.setBackgroundResource(R.drawable.arw_down);
+                        linear_third.setVisibility(View.VISIBLE);
+                    } else {
+                        secondArrow.setBackgroundResource(R.drawable.arw_lt);
+                        linear_third.setVisibility(View.GONE);
+                    }
+                }
+            });
+
+
+           // final String timeSlotName = programArrayList.get(i).getTimeSlotArrayList().get(j).getTimeDetail();
+                final String timeSlotName = timeSlotEntry.getKey();
+            textView2TimeRoom.setText(timeSlotName);
+
+            // third level
+           // for (int k = 0; k < programArrayList.get(i).getTimeSlotArrayList().get(j).getSessionArrayList().size(); k++) {
+                for(Entry<String, Session> sessionEntry: timeSlotEntry.getValue().getSessionEntrySet()){
+                LayoutInflater inflater3 = null;
+                inflater3 = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View thirdView = inflater3.inflate(R.layout.listview_thirdlevel_session, null);
+
+                TextView text_sessionType = (TextView) thirdView.findViewById(R.id.textView3_sessionType);
+                TextView text_sesstionRoomTime = (TextView) thirdView.findViewById(R.id.textView3_sessionRoomTime);
+                CheckBox checkBox = (CheckBox) thirdView.findViewById(R.id.checkBox);
+                checkBox.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (linear_third.getVisibility() == View.GONE) {
-                            secondArrow.setBackgroundResource(R.drawable.arw_down);
-                            linear_third.setVisibility(View.VISIBLE);
-                        } else {
-                            secondArrow.setBackgroundResource(R.drawable.arw_lt);
-                            linear_third.setVisibility(View.GONE);
-                        }
+                        CheckBox checkbox = (CheckBox) v;
+                        if (checkbox.isChecked())
+                            Toast.makeText(getApplicationContext(),
+                                    "Checked box ID: " + v.getId(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                final RelativeLayout linearThird = (RelativeLayout) thirdView.findViewById(R.id.linearThird);
+//                final String sessionType = programArrayList.get(i).getTimeSlotArrayList().get(j).getSessionArrayList().get(k).getSessionType();
+//                final String sessionRoomTime = programArrayList.get(i).getTimeSlotArrayList().get(j).getSessionArrayList().get(k).getSessionRoomTime();
+                String sessionType = sessionEntry.getKey();
+                    text_sessionType.setText(sessionType);
+                //text_sesstionRoomTime.setText(sessionRoomTime);
+
+                linearThird.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(v.getContext(), SessionDetail.class);
+                        startActivity(intent);
+
                     }
                 });
 
 
-                final String timeSlotName = programArrayList.get(i).getTimeSlotArrayList().get(j).getTimeDetail();
-                textView2TimeRoom.setText(timeSlotName);
-
-                // third level
-                for (int k = 0; k < programArrayList.get(i).getTimeSlotArrayList().get(j).getSessionArrayList().size(); k++) {
-
-                    LayoutInflater inflater3 = null;
-                    inflater3 = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    View thirdView = inflater3.inflate(R.layout.listview_thirdlevel_session, null);
-
-                    TextView text_sessionType = (TextView) thirdView.findViewById(R.id.textView3_sessionType);
-                    TextView text_sesstionRoomTime = (TextView) thirdView.findViewById(R.id.textView3_sessionRoomTime);
-                    CheckBox checkBox = (CheckBox) thirdView.findViewById(R.id.checkBox);
-                    checkBox.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            CheckBox checkbox = (CheckBox) v;
-                            if (checkbox.isChecked())
-                                Toast.makeText(getApplicationContext(),
-                                        "Checked box ID: " + v.getId(), Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-                    final RelativeLayout linearThird = (RelativeLayout) thirdView.findViewById(R.id.linearThird);
-                    final String sessionType = programArrayList.get(i).getTimeSlotArrayList().get(j).getSessionArrayList().get(k).getSessionType();
-                    final String sessionRoomTime = programArrayList.get(i).getTimeSlotArrayList().get(j).getSessionArrayList().get(k).getSessionRoomTime();
-                    text_sessionType.setText(sessionType);
-                    text_sesstionRoomTime.setText(sessionRoomTime);
-
-                    linearThird.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            Intent intent = new Intent(v.getContext(), SessionDetail.class);
-                            startActivity(intent);
-
-                        }
-                    });
-
-
-                    linear_third.addView(thirdView);
-                }
-                linear_second.addView(secondView);
+                linear_third.addView(thirdView);
             }
-            firstLevelLinearLayout.addView(firstLevelView);
+            linear_second.addView(secondView);
         }
+        firstLevelLinearLayout.addView(firstLevelView);
     }
+
+}
 
 
     //Radio Button onClick
