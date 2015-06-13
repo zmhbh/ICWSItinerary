@@ -27,6 +27,7 @@ public class ExternalDbOpenHelper extends SQLiteOpenHelper {
     public static final String ID_COLUMN = "_id";
     public static final String VALUE_COLUMN = "value";
     public static final String TIMESLOT_PROGRAM_ID = "program_id";
+
     public static final String SESSION_TIMESLOT_ID="timeslot_id";
     public static final String SESSION_ROOM="room";
     public static final String SESSION_SELECTED="selected";
@@ -39,6 +40,21 @@ public class ExternalDbOpenHelper extends SQLiteOpenHelper {
     public static final String PAPER_AFFILIATION="affiliation";
     public static final String PAPER_AUTHOR_WITH_AFFILIATION="authorwithaffiliation";
     public static final String PAPER_ABSTRACT="abstract";
+
+    // for view by room
+    public static final String ROOM_TABLE="room";
+    public static final String ROOMSESSION_TABLE="room_session";
+    public static final String VIEW_TABLE="view";
+    public static final String ROOM_PROGRAM_ID = "program_id";
+
+
+    public static final String ROOMSESSION_ROOM_ID="room_id";
+    public static final String ROOMSESSION_TIMESLOT="timeslot";
+    public static final String ROOMSESSION_SELECTED="selected";
+    public static final String ROOMSESSION_SESSION_TITLE="session_title";
+    public static final String ROOMSESSION_SESSION_CHAIR="chair";
+    public static final String ROOMSESSION_SESSION_PAPERS="papers";
+
 
 
     //Database name
