@@ -18,8 +18,12 @@ public class TimeSlot {
     }
 
 
-    public void populateSessionName(String sessionName) {
-        timeSlotContent.put(sessionName, new Session(sessionName));
+//    public void populateSessionName(String sessionName) {
+//        timeSlotContent.put(sessionName, new Session(sessionName));
+//    }
+
+    public void populateSession(Session session){
+        timeSlotContent.put(session.getSessionName(),session);
     }
 
     public Session getSession(String sessionName) {

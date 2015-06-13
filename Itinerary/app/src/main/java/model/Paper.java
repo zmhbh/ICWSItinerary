@@ -13,20 +13,41 @@ UaaS: Software Update as a Service for the IaaS Cloud(#8365) (SCC2015-4065)
 */
 
 public class Paper {
+    private int _id;
+    private String uniqueID;   //SCC2015-4065
     private String title; //UaaS: Software Update as a Service for the IaaS Cloud
     private String author; //Kai Liu, Deqing Zou, Hai Jin
-    private String uniqueID;   //SCC2015-4065
+    private String affiliation; //Huazhong University of Science and Technology  China
+    private String authorWithAffiliation;//Kai Liu (Huazhong University of Science and Technology  China)
+    //Deqing Zou (Huazhong University of Science and Technology China)
+    //Hai Jin (Huazhong University of Science and Techn China)
     private String paperAbstract;   //
-    private String simplifiedAffiliation; //Huazhong University of Science and Technology  China
-    private String authorAffiliation;//Kai Liu (Huazhong University of Science and Technology  China)
-                                        //Deqing Zou (Huazhong University of Science and Technology China)
-                                            //Hai Jin (Huazhong University of Science and Techn China)
 
+    public Paper(int _id, String uniqueID, String title, String author,
+                 String affiliation, String authorWithAffiliation, String paperAbstract) {
+        this._id = _id;
+        this.uniqueID = uniqueID;
+        this.title = title;
+        this.author = author;
+        this.affiliation = affiliation;
+        this.authorWithAffiliation = authorWithAffiliation;
+        this.paperAbstract = paperAbstract;
+    }
 
-    public Paper(String title, String author, String simplifiedAffiliation){
-        this.title=title;
-        this.author=author;
-        this.simplifiedAffiliation=simplifiedAffiliation;
+    public int get_id() {
+        return _id;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
+    }
+
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
+    public void setUniqueID(String uniqueID) {
+        this.uniqueID = uniqueID;
     }
 
     public String getTitle() {
@@ -45,12 +66,20 @@ public class Paper {
         this.author = author;
     }
 
-    public String getUniqueID() {
-        return uniqueID;
+    public String getAffiliation() {
+        return affiliation;
     }
 
-    public void setUniqueID(String uniqueID) {
-        this.uniqueID = uniqueID;
+    public void setAffiliation(String affiliation) {
+        this.affiliation = affiliation;
+    }
+
+    public String getAuthorWithAffiliation() {
+        return authorWithAffiliation;
+    }
+
+    public void setAuthorWithAffiliation(String authorWithAffiliation) {
+        this.authorWithAffiliation = authorWithAffiliation;
     }
 
     public String getPaperAbstract() {
@@ -59,21 +88,5 @@ public class Paper {
 
     public void setPaperAbstract(String paperAbstract) {
         this.paperAbstract = paperAbstract;
-    }
-
-    public String getSimplifiedAffiliation() {
-        return simplifiedAffiliation;
-    }
-
-    public void setSimplifiedAffiliation(String simplifiedAffiliation) {
-        this.simplifiedAffiliation = simplifiedAffiliation;
-    }
-
-    public String getAuthorAffiliation() {
-        return authorAffiliation;
-    }
-
-    public void setAuthorAffiliation(String authorAffiliation) {
-        this.authorAffiliation = authorAffiliation;
     }
 }

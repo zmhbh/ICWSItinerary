@@ -5,6 +5,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.app.Activity;
+
+import database.ExternalDbOpenHelper;
 import intents.ClickInterface;
 import intents.IntentFactory;
 
@@ -15,6 +17,8 @@ public class Index extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
+
+
     }
 
     @Override

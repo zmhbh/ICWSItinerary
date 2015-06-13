@@ -28,7 +28,7 @@ public class SessionDetail extends ListActivity implements AdapterView.OnItemCli
         ListView listView = (ListView) findViewById(android.R.id.list);
         listView.setOnItemClickListener(this);
 
-        Paper paper = new Paper("This guy is so cool!", "Jingyu Huang", "CMU");
+        Paper paper = new Paper(1,"This guy is so cool!", "Jingyu Huang", "CMU","sdf","Sdfsd","SDfsdf");
         myListAdapter.addItem(0,paper);
         myListAdapter.addItem(1,paper);
         this.setSelection(0);

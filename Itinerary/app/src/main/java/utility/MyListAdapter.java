@@ -65,7 +65,7 @@ public class MyListAdapter extends BaseAdapter {
 
         paperTag.paperAuthor.setText(paperArrayList.get(position).getAuthor());
         paperTag.paperTitle.setText(paperArrayList.get(position).getTitle());
-        paperTag.paperSimplifiedAffl.setText(paperArrayList.get(position).getSimplifiedAffiliation());
+        paperTag.paperSimplifiedAffl.setText(paperArrayList.get(position).getAffiliation());
         return convertView;
     }
 
