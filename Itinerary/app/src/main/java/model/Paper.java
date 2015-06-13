@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Created by zmhbh on 6/7/15.
  */
@@ -12,7 +14,7 @@ UaaS: Software Update as a Service for the IaaS Cloud(#8365) (SCC2015-4065)
     Hai Jin (Huazhong University of Science and Techn China)
 */
 
-public class Paper {
+public class Paper implements Serializable {
     private int _id;
     private String uniqueID;   //SCC2015-4065
     private String title; //UaaS: Software Update as a Service for the IaaS Cloud

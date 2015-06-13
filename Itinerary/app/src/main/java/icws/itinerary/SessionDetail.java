@@ -1,6 +1,7 @@
 package icws.itinerary;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,11 +14,23 @@ import intents.IntentFactory;
 import model.Paper;
 import utility.MyListAdapter;
 import android.app.Activity;
+import android.widget.Toast;
 
+import model.Session;
+import utility.PaperListViewTag;
+
+import android.widget.TextView;
+import java.util.Map.Entry;
 
 public class SessionDetail extends ListActivity implements AdapterView.OnItemClickListener {
 
     private MyListAdapter myListAdapter;
+    private Session session;
+    private TextView textView_sessionName;
+    private TextView textView_sessionTitle;
+    private TextView textView_sessionTimeRoom;
+    private TextView textView_sessionChair;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,13 +38,33 @@ public class SessionDetail extends ListActivity implements AdapterView.OnItemCli
         myListAdapter = new MyListAdapter(this);
         setListAdapter(myListAdapter);
 
+        textView_sessionName = (TextView)findViewById(R.id.textView_sessionName);
+        textView_sessionTitle=(TextView) findViewById(R.id.textView_sessionTitle);
+        textView_sessionTimeRoom=(TextView) findViewById(R.id.textView_sessionTimeRoom);
+        textView_sessionChair=(TextView) findViewById(R.id.textView_sessionChair);
+
+        session=(Session) getIntent().getSerializableExtra("session");
+
+        textView_sessionName.setText(session.getSessionName());
+        textView_sessionTitle.setText(session.getSessionTitle());
+        textView_sessionTimeRoom.setText(session.getSessionRoomTime());
+        textView_sessionChair.setText(session.getSessionChair());
+
+
         ListView listView = (ListView) findViewById(android.R.id.list);
         listView.setOnItemClickListener(this);
 
-        Paper paper = new Paper(1,"This guy is so cool!", "Jingyu Huang", "CMU","sdf","Sdfsd","SDfsdf");
-        myListAdapter.addItem(0,paper);
-        myListAdapter.addItem(1,paper);
+        int pos=0;
+        for(Entry<String, Paper> entrySet:session.getPaperEntrySet()){
+            myListAdapter.addItem(pos, entrySet.getValue());
+        }
+
+//        myListAdapter.addItem(0,paper);
+//        myListAdapter.addItem(1,paper);
         this.setSelection(0);
+        session=(Session) getIntent().getSerializableExtra("session");
+        Toast.makeText(getApplicationContext(),
+                "Session name: " + session.getSessionName(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -60,6 +93,13 @@ public class SessionDetail extends ListActivity implements AdapterView.OnItemCli
     /*We can directly send Item object into next page*/
     @Override
     public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-        ClickInterface click = IntentFactory.goToNext(this, PaperDetail.class, null, null);
+        PaperListViewTag paperTag=(PaperListViewTag)v.getTag();
+        Paper paper =paperTag.getPaperTag();
+        Intent intent = new Intent(v.getContext(), PaperDetail.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("paper",paper);
+        intent.putExtras(bundle);
+        startActivity(intent);
+       // ClickInterface click = IntentFactory.goToNext(this, PaperDetail.class, null, null);
     }
 }

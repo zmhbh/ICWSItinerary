@@ -55,7 +55,7 @@ public class MyListAdapter extends BaseAdapter {
             paperTag= new PaperListViewTag(
                     (TextView) convertView.findViewById(R.id.textView4_paperTitle),
                     (TextView) convertView.findViewById(R.id.textView4_paperAuthor),
-                    (TextView) convertView.findViewById(R.id.textView4_paperSimpifiedAffl));
+                    (TextView) convertView.findViewById(R.id.textView4_paperSimpifiedAffl),paperArrayList.get(position));
             convertView.setTag(paperTag);
 
         }
@@ -66,6 +66,7 @@ public class MyListAdapter extends BaseAdapter {
         paperTag.paperAuthor.setText(paperArrayList.get(position).getAuthor());
         paperTag.paperTitle.setText(paperArrayList.get(position).getTitle());
         paperTag.paperSimplifiedAffl.setText(paperArrayList.get(position).getAffiliation());
+
         return convertView;
     }
 

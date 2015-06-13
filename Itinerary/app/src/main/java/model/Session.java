@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
@@ -8,7 +9,7 @@ import java.util.Set;
 /**
  * Created by zmhbh on 6/8/15.
  */
-public class Session {
+public class Session implements Serializable {
     private int _id;
     private String sessionName;
     private String sessionRoomTime;
@@ -59,13 +60,7 @@ public class Session {
         sessionContent.put(paper.getUniqueID(), paper);
 
     }
-//
-//    public Session(String sessionTitle, String sessionRoomTime) {
-//        super();
-//
-//        this.sessionTitle = sessionTitle;
-//        this.sessionRoomTime = sessionRoomTime;
-//    }
+
 
     public String getSessionTitle() {
         return sessionTitle;
