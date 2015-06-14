@@ -31,7 +31,7 @@ public class IntentFactory {
         else if (cl.equals(CityMap.class)){
             onClick = new GoToCityMap(packageContext,cl,objectOne,objectTwo);
         }
-        else if (cl.equals(PostEvent.class)){
+        else if (cl.equals(EventPost.class)){
             onClick = new GoToPostEvent(packageContext,cl,objectOne,objectTwo);
         }
 

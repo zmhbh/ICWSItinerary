@@ -2,7 +2,7 @@ package intents;
 import android.content.Context;
 import android.content.Intent;
 
-import icws.itinerary.PostEvent;
+import icws.itinerary.EventPost;
 
 /**
  * Created by zmhbh on 6/4/15.
@@ -10,7 +10,7 @@ import icws.itinerary.PostEvent;
 public class GoToPostEvent implements ClickInterface{
     public GoToPostEvent(Context packageContext,Class<?> cl, Object objectOne, Object objectTwo){
         Intent intent=new Intent();
-        intent.setClass(packageContext, PostEvent.class);
+        intent.setClass(packageContext, EventPost.class);
         packageContext.startActivity(intent);
     }
 }

@@ -59,8 +59,6 @@ public class SessionDetail extends ListActivity implements AdapterView.OnItemCli
             myListAdapter.addItem(pos, entrySet.getValue());
         }
 
-//        myListAdapter.addItem(0,paper);
-//        myListAdapter.addItem(1,paper);
         this.setSelection(0);
         session=(Session) getIntent().getSerializableExtra("session");
         Toast.makeText(getApplicationContext(),

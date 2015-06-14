@@ -13,4 +13,8 @@
     <string name="title_activity_floor_map">FloorMap</string>
     <string name="title_activity_session_detail">SessionDetail</string>
     <string name="title_activity_paper_detail">PaperDetail</string>
+    <string name="title_activity_my_event">MyEvent</string>
+    <string name="title_activity_launch">LaunchActivity</string>
+    <string name="title_activity_submit_profile">SubmitProfile</string>
+    <string name="title_activity_launch_event">LaunchEvent</string>
 </resources>

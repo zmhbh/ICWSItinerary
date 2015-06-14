@@ -53,7 +53,7 @@
             android:label="@string/title_activity_city_map" >
         </activity>
         <activity
-            android:name=".PostEvent"
+            android:name=".EventPost"
             android:label="@string/title_activity_post_event" >
         </activity>
         <activity
@@ -67,6 +67,19 @@
         <activity
             android:name=".PaperDetail"
             android:label="@string/title_activity_paper_detail" >
+        </activity>
+        <activity
+            android:name=".MyEvent"
+            android:label="@string/title_activity_my_event" >
+        </activity>
+
+        <activity
+            android:name=".SubmitProfile"
+            android:label="@string/title_activity_submit_profile" >
+        </activity>
+        <activity
+            android:name=".LaunchEvent"
+            android:label="@string/title_activity_launch_event" >
         </activity>
     </application>
 

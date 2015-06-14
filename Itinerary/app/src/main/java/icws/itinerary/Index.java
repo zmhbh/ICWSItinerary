@@ -65,7 +65,7 @@ public class Index extends Activity {
     }
     //click post event button
     public void goPostEvent(View v){
-        ClickInterface click = IntentFactory.goToNext(this, PostEvent.class,null,null);
+        ClickInterface click = IntentFactory.goToNext(this, EventPost.class,null,null);
     }
     //click setting button
     public void goSetting (View v){
