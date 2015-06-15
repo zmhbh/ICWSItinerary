@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.content.Intent;
+import android.widget.EditText;
 
 public class LaunchEvent extends Activity {
 
@@ -39,6 +40,10 @@ public class LaunchEvent extends Activity {
 
     public void goSubmit(View v){
 
+        EditText editTextEventTheme = (EditText) findViewById(R.id.editText_eventTheme);
+        EditText editTextTime= (EditText) findViewById(R.id.editText_eventTime);
+        EditText editTextPlace = (EditText) findViewById(R.id.editText_eventPlace);
+        EditText editTextContent = (EditText) findViewById(R.id.editText_eventContent);
         Intent intent = new Intent(this, MyEvent.class);
         startActivity(intent);
     }

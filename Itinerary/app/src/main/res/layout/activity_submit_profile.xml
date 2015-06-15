@@ -28,7 +28,7 @@
         android:text="Submit"
         android:id="@+id/button_submitProfile"
         android:onClick="goSubmit"
-        android:layout_below="@+id/editText_email"
+        android:layout_below="@+id/editText_eventContent"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp" />
 
@@ -129,7 +129,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editText_email"
+        android:id="@+id/editText_eventContent"
         android:layout_alignTop="@+id/textView16"
         android:layout_toRightOf="@+id/textView12"
         android:layout_toEndOf="@+id/textView12"

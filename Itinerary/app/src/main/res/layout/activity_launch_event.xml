@@ -10,11 +10,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Launch Event"
-        android:id="@+id/textView17"
-        android:textColor="#000000"
-        android:layout_alignParentTop="true"
+        android:id="@+id/textView11"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -29,106 +26,118 @@
         android:shadowRadius="5"
         android:background="@drawable/button"
         android:text="Submit"
-        android:id="@+id/button_launchEvent"
+        android:id="@+id/button_submitProfile"
         android:onClick="goSubmit"
-
-        android:layout_below="@+id/editText4"
-        android:layout_alignLeft="@+id/textView17"
-        android:layout_alignStart="@+id/textView17"
-        android:layout_marginTop="20dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Event Place:"
-        android:id="@+id/textView21"
-        android:layout_below="@+id/textView22"
+        android:text="Event Place: "
+        android:id="@+id/textView12"
+        android:textColor="#000000"
+        android:layout_above="@+id/textView16"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginBottom="20dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Event Time: "
+        android:id="@+id/textView13"
+        android:layout_above="@+id/textView12"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="20dp"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Event Theme: "
+        android:id="@+id/textView14"
+        android:layout_above="@+id/textView13"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="20dp"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Launch Event"
+        android:id="@+id/textView15"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:textSize="20sp" />
+        android:textColor="#000000"
+        android:textSize="30sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText_eventTheme"
+        android:hint="theme"
+        android:layout_alignTop="@+id/textView14"
+        android:layout_toRightOf="@+id/textView14"
+        android:layout_toEndOf="@+id/textView14" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Event Time:"
-        android:id="@+id/textView22"
-        android:layout_below="@+id/textView23"
+        android:text="Event Detail:"
+        android:id="@+id/textView16"
+        android:textColor="#000000"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Event Theme:"
-        android:id="@+id/textView23"
-        android:textSize="20sp"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp" />
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText_eventTime"
+        android:hint="time"
+        android:layout_below="@+id/textView14"
+        android:layout_toRightOf="@+id/textView13"
+        android:layout_toEndOf="@+id/textView13" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Event Content:"
-        android:id="@+id/textView24"
-        android:textSize="20sp"
-        android:layout_below="@+id/textView17"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp" />
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText_eventPlace"
+        android:layout_below="@+id/textView13"
+        android:layout_toRightOf="@+id/textView12"
+        android:layout_toEndOf="@+id/textView12"
+        android:hint="place" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText"
-        android:isScrollContainer="true"
-        android:minHeight="60dp"
-        android:hint="content"
-        android:layout_below="@+id/textView24"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText_launchEventTime"
-        android:layout_alignTop="@+id/textView22"
-        android:layout_toRightOf="@+id/textView21"
-        android:layout_toEndOf="@+id/textView21"
-        android:hint="time" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText_launchEventTheme"
-        android:layout_alignTop="@+id/textView23"
-        android:layout_toRightOf="@+id/textView23"
-        android:layout_toEndOf="@+id/textView23"
-        android:hint="theme" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText4"
-        android:layout_alignTop="@+id/textView21"
-        android:layout_alignLeft="@+id/editText_launchEventTime"
-        android:layout_alignStart="@+id/editText_launchEventTime"
-        android:hint="place" />
+        android:id="@+id/editText_eventContent"
+        android:layout_alignTop="@+id/textView16"
+        android:layout_toRightOf="@+id/textView12"
+        android:layout_toEndOf="@+id/textView12"
+        android:hint="simple description" />
 
 </RelativeLayout>

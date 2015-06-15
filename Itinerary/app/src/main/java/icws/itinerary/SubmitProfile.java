@@ -40,7 +40,7 @@ public class SubmitProfile extends Activity {
         editTextFullName = (EditText) findViewById(R.id.editText_fullName);
         editTextTitle = (EditText) findViewById(R.id.editText_title);
         editTextCollege = (EditText)findViewById(R.id.editText_college);
-        editTextEmail=(EditText) findViewById(R.id.editText_email);
+        editTextEmail=(EditText) findViewById(R.id.editText_eventContent);
 
 
 
