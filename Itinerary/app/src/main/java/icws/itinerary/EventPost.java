@@ -1,22 +1,54 @@
 package icws.itinerary;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.content.Intent;
 
+import org.w3c.dom.Text;
+
+import database.ExternalDbOpenHelper;
+import database.ProfileDbAccess;
+import android.widget.TextView;
+
 public class EventPost extends Activity {
 
+    //database
+    private SQLiteDatabase database;
+    private ExternalDbOpenHelper externalDbOpenHelper;
+
+    private String profileFullname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_event);
         setTitle("Event Post");
+        //TextView
+        TextView textViewFullname= (TextView) findViewById(R.id.textView_eventFullname);
 
-        Intent intent = new Intent(this,SubmitProfile.class);
-        startActivity(intent);
+        // database
+        externalDbOpenHelper = new ExternalDbOpenHelper(this);
+        database = externalDbOpenHelper.openDataBase();
+
+
+        ProfileDbAccess profileDbAccess = new ProfileDbAccess(database);
+        profileFullname=profileDbAccess.getProfileFullname();
+        if(profileFullname==null) {
+            Intent intent = new Intent(this, SubmitProfile.class);
+            startActivity(intent);
+        }
+        // set the fullname in event post
+        textViewFullname.setText(profileFullname);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        externalDbOpenHelper.close();
+
     }
 
     @Override

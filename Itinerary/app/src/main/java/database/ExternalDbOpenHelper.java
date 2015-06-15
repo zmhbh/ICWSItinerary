@@ -56,6 +56,12 @@ public class ExternalDbOpenHelper extends SQLiteOpenHelper {
     public static final String ROOMSESSION_SESSION_PAPERS="papers";
 
 
+    // for profile
+    public static final String PROFILE_TABLE="profile";
+    public static final String PROFILE_FULLNAME="fullname";
+    public static final String PROFILE_TITLE="title";
+    public static final String PROFILE_COLLEGE="college";
+    public static final String PROFILE_EMAIL="email";
 
     //Database name
     private static final String DB_NAME = "cmuicws.sqlite3";

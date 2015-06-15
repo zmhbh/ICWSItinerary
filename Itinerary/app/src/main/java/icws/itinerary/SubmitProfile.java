@@ -1,18 +1,55 @@
 package icws.itinerary;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.content.Intent;
+
+import database.ExternalDbOpenHelper;
+import database.ProfileDbAccess;
+import android.widget.EditText;
+
 public class SubmitProfile extends Activity {
+    //database
+    private SQLiteDatabase database;
+    private ExternalDbOpenHelper externalDbOpenHelper;
+    //EditText
+    EditText editTextFullName;
+    EditText editTextTitle;
+    EditText editTextCollege;
+    EditText editTextEmail;
+    //
+    private String fullname;
+    private String title;
+    private String college;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_profile);
+        // database
+        externalDbOpenHelper = new ExternalDbOpenHelper(this);
+        database = externalDbOpenHelper.openDataBase();
 
+
+        // EditText
+        editTextFullName = (EditText) findViewById(R.id.editText_fullName);
+        editTextTitle = (EditText) findViewById(R.id.editText_title);
+        editTextCollege = (EditText)findViewById(R.id.editText_college);
+        editTextEmail=(EditText) findViewById(R.id.editText_email);
+
+
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        externalDbOpenHelper.close();
 
     }
 
@@ -39,6 +76,19 @@ public class SubmitProfile extends Activity {
     }
 
     public void goSubmit(View v){
+       fullname= editTextFullName.getText().toString().trim();
+        title = editTextTitle.getText().toString().trim();
+        college = editTextCollege.getText().toString().trim();
+        email= editTextEmail.getText().toString().trim();
+        // for future remote database
+        /*
+        if email is not repeated, store it into local database
+         */
+        // local database
+        ProfileDbAccess profileDbAccess = new ProfileDbAccess(database);
+        profileDbAccess.insertProfile(fullname,title,college,email);
 
+        Intent intent =new Intent(this,EventPost.class);
+        startActivity(intent);
     }
 }
