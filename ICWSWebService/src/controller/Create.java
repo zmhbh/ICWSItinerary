@@ -10,10 +10,25 @@ import javax.sql.DataSource;
 import model.Consumer;
 import model.Item;
 import model.Retailer;
+import model.event.Profile;
 
 public class Create extends DatabaseUtil{
 	private PreparedStatement statement = null;	
 
+	
+	public boolean createProfile(Profile profile){
+	
+		StringBuffer stringBuff = new StringBuffer(
+				"INSERT INTO profile (fullname, title, college, email) VALUES (");
+		stringBuff.append("'" + profile.getFullname() + "'" + " ,");
+		stringBuff.append("'" + profile.getTitle() + "'" + " ,");
+		stringBuff.append("'" + profile.getCollege() + "'" + " ,");
+		stringBuff.append("'" + profile.getEmail() + "'" + " );");
+		sql = stringBuff.toString();
+		return databaseUtil_create(sql);
+	}
+	
+	
 	public boolean createConsumer(Consumer consumer) {
 		// INSERT INTO consumers VALUES (email, username, password);
 		StringBuffer stringBuff = new StringBuffer(
