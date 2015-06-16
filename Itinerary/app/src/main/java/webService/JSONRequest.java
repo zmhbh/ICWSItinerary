@@ -22,6 +22,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.Attributes;
 
 /**
  * Created by zmhbh on 6/14/15.
@@ -48,6 +49,10 @@ public class JSONRequest extends IntentService {
         process_response_filter = intent.getStringExtra("process_response_filter");
         inMessage = intent.getStringExtra(IN_MSG).trim();
         switch (inMessage) {
+            case "getNotification":
+                getNotification();
+                break;
+
             case "postNotification":
                 String notice=intent.getStringExtra("notice");
                 String postTime=intent.getStringExtra("postTime");
@@ -76,6 +81,12 @@ public class JSONRequest extends IntentService {
         }
     }
 
+    private void getNotification(){
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+        nameValuePairs.add(new BasicNameValuePair("test","test"));
+        String url=webServiceUrl+"GetNotification";
+        requestBroadcastProcess(url,nameValuePairs);
+    }
 
     private void postNotification(String notice, String postTime, String detail){
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);

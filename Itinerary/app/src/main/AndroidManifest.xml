@@ -94,6 +94,10 @@
             android:name=".NotificationDetail"
             android:label="@string/title_activity_notification_detail" >
         </activity>
+        <activity
+            android:name=".Setting"
+            android:label="@string/title_activity_setting" >
+        </activity>
     </application>
 
 </manifest>

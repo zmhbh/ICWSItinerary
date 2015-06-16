@@ -56,6 +56,9 @@ public class IntentFactory {
         else if (cl.equals(NotificationDetail.class)){
             onClick = new GoToNotificationDetail(packageContext,cl,objectOne,objectTwo);
         }
+        else if (cl.equals(Setting.class)){
+            onClick = new GoToSetting (packageContext,cl,objectOne,objectTwo);
+        }
 
         else {
             //

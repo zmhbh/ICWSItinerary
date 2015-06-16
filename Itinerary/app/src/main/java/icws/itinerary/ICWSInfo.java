@@ -1,12 +1,12 @@
 package icws.itinerary;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class ICWSInfo extends ActionBarActivity {
+public class ICWSInfo extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -63,6 +63,10 @@ public class ExternalDbOpenHelper extends SQLiteOpenHelper {
     public static final String PROFILE_COLLEGE="college";
     public static final String PROFILE_EMAIL="email";
 
+    // for notification
+    public static final String NOTIFICATION_TABLE="notification";
+    public static final String NOTIFICATION_NUMBER="number";
+
     //Database name
     private static final String DB_NAME = "cmuicws.sqlite3";
 

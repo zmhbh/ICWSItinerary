@@ -1,6 +1,6 @@
 package icws.itinerary;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,7 +9,7 @@ import android.view.View;
 import intents.ClickInterface;
 import intents.IntentFactory;
 
-public class VenueMap extends ActionBarActivity {
+public class VenueMap extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

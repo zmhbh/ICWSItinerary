@@ -54,7 +54,7 @@ public class NotificationActivity extends ListActivity implements ProcessJSONInt
             public void onReceive(Context context, Intent intent) {
                 String response = null;
                 String responseType = intent.getStringExtra(JSONRequest.IN_MSG);
-                if (responseType.trim().equalsIgnoreCase("postNotification")) {
+                if (responseType.trim().equalsIgnoreCase("getNotification")) {
                     response = intent.getStringExtra(JSONRequest.OUT_MSG);
                     //
                     processJsonResponse(response);
@@ -72,10 +72,17 @@ public class NotificationActivity extends ListActivity implements ProcessJSONInt
 
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        myAdapter.removeAllNotification();
+        askToGetNotification();
+    }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
         unregisterReceiver(receiver);
     }
 
@@ -119,7 +126,7 @@ public class NotificationActivity extends ListActivity implements ProcessJSONInt
                 }
 
             } else {
-                Toast toast = Toast.makeText(this, "Posting notification failure, Please try again!", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, "Error in receiving notifications!", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP, 105, 50);
                 toast.show();
             }

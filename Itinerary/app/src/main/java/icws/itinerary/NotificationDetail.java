@@ -1,12 +1,14 @@
 package icws.itinerary;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import org.w3c.dom.Text;
 
-public class NotificationDetail extends ActionBarActivity {
+public class NotificationDetail extends Activity {
 
     private String notice;
     private String time;
@@ -18,6 +20,13 @@ public class NotificationDetail extends ActionBarActivity {
         notice=getIntent().getStringExtra("notice");
         time=getIntent().getStringExtra("time");
         detail = getIntent().getStringExtra("detail");
+
+        TextView textView_detailNotice = (TextView) findViewById(R.id.textView_detailNotice);
+        TextView textView_detailTime = (TextView) findViewById(R.id.textView_detailTime);
+        TextView textView_detail=(TextView) findViewById(R.id.textView_detail);
+        textView_detailNotice.setText(notice);
+        textView_detailTime.setText(time);
+        textView_detail.setText(detail);
     }
 
     @Override

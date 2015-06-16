@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.app.Activity;
@@ -60,8 +61,8 @@ public class PostNotification extends Activity implements ProcessJSONInterface {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
         unregisterReceiver(receiver);
     }
 
@@ -111,6 +112,7 @@ public class PostNotification extends Activity implements ProcessJSONInterface {
     @Override
     public void processJsonResponse(String response) {
         JSONObject responseObj = null;
+        Log.e("get posting response: ","response");
         try {
             //create JSON object from JSON string
             responseObj = new JSONObject(response);

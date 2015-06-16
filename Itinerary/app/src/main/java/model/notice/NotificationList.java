@@ -8,16 +8,20 @@ import java.util.ArrayList;
 public class NotificationList {
 
     private ArrayList<Notification> notificationArrayList;
-    public NotificationList(){
-        notificationArrayList=new ArrayList<Notification>();
+
+    public NotificationList() {
+        notificationArrayList = new ArrayList<Notification>();
     }
+
     public void insertNotification(Notification notification) {
         notificationArrayList.add(notification);
     }
-    public int getNotificationNum(){
+
+    public int getNotificationNum() {
         return notificationArrayList.size();
     }
-    public Notification getNotification(int index){
+
+    public Notification getNotification(int index) {
         return notificationArrayList.get(index);
     }
 }

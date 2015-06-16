@@ -20,4 +20,5 @@
     <string name="title_activity_notification">Notification</string>
     <string name="title_activity_post_notification">PostNotification</string>
     <string name="title_activity_notification_detail">NotificationDetail</string>
+    <string name="title_activity_setting">Setting</string>
 </resources>
