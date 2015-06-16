@@ -46,6 +46,16 @@ public class IntentFactory {
         else if (cl.equals(PaperDetail.class)){
             onClick = new GoToPaperDetail(packageContext, cl, objectOne, objectTwo);
         }
+        else if(cl.equals(PostNotification.class)){
+            onClick = new GoToPostNotification(packageContext,cl,objectOne,objectTwo);
+        }
+
+        else if (cl.equals(NotificationActivity.class)){
+            onClick = new GoToNotification(packageContext,cl,objectOne,objectTwo);
+        }
+        else if (cl.equals(NotificationDetail.class)){
+            onClick = new GoToNotificationDetail(packageContext,cl,objectOne,objectTwo);
+        }
 
         else {
             //

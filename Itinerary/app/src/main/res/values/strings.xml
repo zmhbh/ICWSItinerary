@@ -17,4 +17,7 @@
     <string name="title_activity_launch">LaunchActivity</string>
     <string name="title_activity_submit_profile">SubmitProfile</string>
     <string name="title_activity_launch_event">LaunchEvent</string>
+    <string name="title_activity_notification">Notification</string>
+    <string name="title_activity_post_notification">PostNotification</string>
+    <string name="title_activity_notification_detail">NotificationDetail</string>
 </resources>

@@ -48,6 +48,13 @@ public class JSONRequest extends IntentService {
         process_response_filter = intent.getStringExtra("process_response_filter");
         inMessage = intent.getStringExtra(IN_MSG).trim();
         switch (inMessage) {
+            case "postNotification":
+                String notice=intent.getStringExtra("notice");
+                String postTime=intent.getStringExtra("postTime");
+                String detail=intent.getStringExtra("detail");
+                postNotification(notice, postTime, detail);
+                break;
+
             case "submitProfile":
                 String fullname = intent.getStringExtra("fullname");
                 String title = intent.getStringExtra("title");
@@ -61,6 +68,7 @@ public class JSONRequest extends IntentService {
                 String eventTime = intent.getStringExtra("eventTime");
                 String eventPlace = intent.getStringExtra("eventPlace");
                 String eventContent= intent.getStringExtra("eventContent");
+                // for future implementation
                 break;
 
             default:
@@ -68,6 +76,15 @@ public class JSONRequest extends IntentService {
         }
     }
 
+
+    private void postNotification(String notice, String postTime, String detail){
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+        nameValuePairs.add(new BasicNameValuePair("notice",notice));
+        nameValuePairs.add(new BasicNameValuePair("postTime",postTime));
+        nameValuePairs.add(new BasicNameValuePair("detail",detail));
+        String url = webServiceUrl+"PostNotification";
+        requestBroadcastProcess(url,nameValuePairs);
+    }
 
     private void submitProfile(String fullname, String title, String college, String email) {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);

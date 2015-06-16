@@ -63,9 +63,17 @@ public class Index extends Activity {
     public void goCityMap(View v){
         ClickInterface click = IntentFactory.goToNext(this,CityMap.class,null,null);
     }
-    //click post event button
-    public void goPostEvent(View v){
-        ClickInterface click = IntentFactory.goToNext(this, EventPost.class,null,null);
+//    //click post event button
+//    public void goPostEvent(View v){
+//        ClickInterface click = IntentFactory.goToNext(this, EventPost.class,null,null);
+//    }
+    public void goPostNotification(View v){
+        boolean committeeFlag=true;
+        if(committeeFlag){
+            ClickInterface click = IntentFactory.goToNext(this,PostNotification.class,null,null);
+        }else{
+            ClickInterface click = IntentFactory.goToNext(this,NotificationActivity.class,null,null);
+        }
     }
     //click setting button
     public void goSetting (View v){
