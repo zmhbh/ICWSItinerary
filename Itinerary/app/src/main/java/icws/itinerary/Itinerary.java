@@ -368,6 +368,7 @@ public class Itinerary extends Activity {
                     intent.putExtra("viewid", checkedId);
 
                     startActivity(intent);
+                    finish();
                 } else {
                     contentFiller.updateViewSelected("room");
                     String test = contentFiller.getViewSelected();
@@ -379,6 +380,7 @@ public class Itinerary extends Activity {
                     intent.putExtra("viewid", checkedId);
 
                     startActivity(intent);
+                    finish();
 
                 }
 

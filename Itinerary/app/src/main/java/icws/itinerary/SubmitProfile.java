@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 public class SubmitProfile extends Activity implements ProcessJSONInterface {
 
+    //backend
     private final String process_response_filter = "action.submitProfile";
     private BroadcastReceiver receiver;
     //database
@@ -78,14 +79,13 @@ public class SubmitProfile extends Activity implements ProcessJSONInterface {
 
         registerReceiver(receiver, filter);
 
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         externalDbOpenHelper.close();
-
+        unregisterReceiver(receiver);
     }
 
     public void goSubmit(View v) {
@@ -162,12 +162,7 @@ public class SubmitProfile extends Activity implements ProcessJSONInterface {
 
                 Intent intent = new Intent(this, EventPost.class);
                 startActivity(intent);
-
-
-                //               ClickInterface click = IntentFactory.goToNext(this, ConsumerItemListPage.class, null, null);
-//                Intent goToItemList = new Intent();
-//                goToItemList.setClass(this, ConsumerItemListPage.class);
-//                startActivity(goToItemList);
+                finish();
 
             } else {
                 Toast toast = Toast.makeText(this, "Creating profile failure, maybe email does exist, Please try again!", Toast.LENGTH_SHORT);

@@ -56,6 +56,13 @@ public class JSONRequest extends IntentService {
                 submitProfile(fullname,title,college,email);
                 break;
 
+            case "launchEvent":
+                String eventTheme=intent.getStringExtra("eventTheme");
+                String eventTime = intent.getStringExtra("eventTime");
+                String eventPlace = intent.getStringExtra("eventPlace");
+                String eventContent= intent.getStringExtra("eventContent");
+                break;
+
             default:
                 break;
         }

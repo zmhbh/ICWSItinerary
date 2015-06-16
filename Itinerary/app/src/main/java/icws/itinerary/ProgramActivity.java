@@ -37,7 +37,7 @@ public class ProgramActivity extends Activity {
     private ContentFiller contentFiller;
 
     @Override
-    protected void onStop() {
+    protected void onDestroy() {
         super.onStop();
         externalDbOpenHelper.close();
 
@@ -176,11 +176,30 @@ public class ProgramActivity extends Activity {
                         // set session id (database) as tag
                         checkBox.setTag(session);
                         // click event
+                        /*checkBox.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                            CheckBox checkBox = (CheckBox) v;
+                                Session session=(Session)checkBox.getTag();
+                                Toast.makeText(getApplicationContext(),
+                                        "Session ID in database: " + session.get_id(), Toast.LENGTH_SHORT).show();
+                                if(checkBox.isChecked()){
+                                    session.setSessionSelected("1");
+                                    //for database update
+                                    contentFiller.updateSessionSelected(session.get_id(), "1");
+                                }else{
+                                    session.setSessionSelected("0");
+                                    contentFiller.updateSessionSelected(session.get_id(), "0");
+                                    //for database update
+                                }
+                            }
+                        });*/
+
                         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                             @Override
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                 CheckBox checkBox = (CheckBox) buttonView;
-                                Session session = (Session) buttonView.getTag();
+                                Session session = (Session) checkBox.getTag();
                                 Toast.makeText(getApplicationContext(),
                                         "Session ID in database: " + session.get_id(), Toast.LENGTH_SHORT).show();
                                 if (isChecked) {
@@ -310,7 +329,7 @@ public class ProgramActivity extends Activity {
                             @Override
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                 CheckBox checkBox = (CheckBox) buttonView;
-                                Session session = (Session) buttonView.getTag();
+                                Session session = (Session) checkBox.getTag();
                                 Toast.makeText(getApplicationContext(),
                                         "Session ID in database: " + session.get_id(), Toast.LENGTH_SHORT).show();
                                 if (isChecked) {
@@ -373,8 +392,8 @@ public class ProgramActivity extends Activity {
                     Intent intent = new Intent(group.getContext(), ProgramActivity.class);
                     intent.putExtra("view", "time");
                     intent.putExtra("viewid", checkedId);
-
                     startActivity(intent);
+                    finish();
                 } else {
                     contentFiller.updateViewSelected("room");
                     String test = contentFiller.getViewSelected();
@@ -386,6 +405,7 @@ public class ProgramActivity extends Activity {
                     intent.putExtra("viewid", checkedId);
 
                     startActivity(intent);
+                    finish();
 
                 }
 

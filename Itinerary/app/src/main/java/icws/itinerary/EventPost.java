@@ -13,6 +13,7 @@ import org.w3c.dom.Text;
 import database.ExternalDbOpenHelper;
 import database.ProfileDbAccess;
 import android.widget.TextView;
+import model.event.Profile;
 
 public class EventPost extends Activity {
 
@@ -20,7 +21,7 @@ public class EventPost extends Activity {
     private SQLiteDatabase database;
     private ExternalDbOpenHelper externalDbOpenHelper;
 
-    private String profileFullname;
+    private Profile profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +36,15 @@ public class EventPost extends Activity {
 
 
         ProfileDbAccess profileDbAccess = new ProfileDbAccess(database);
-        profileFullname=profileDbAccess.getProfileFullname();
-        if(profileFullname==null) {
+        profile=profileDbAccess.getProfile();
+        if(profile==null) {
             Intent intent = new Intent(this, SubmitProfile.class);
             startActivity(intent);
+            finish();
+        }else {
+            // set the fullname in event post
+            textViewFullname.setText(profile.getFullname());
         }
-        // set the fullname in event post
-        textViewFullname.setText(profileFullname);
     }
 
     @Override
@@ -77,6 +80,7 @@ public class EventPost extends Activity {
     public void  goLaunchEvent(View v){
 
         Intent intent= new Intent(this,LaunchEvent.class);
+        intent.putExtra("email",profile.getEmail());
         startActivity(intent);
     }
 
