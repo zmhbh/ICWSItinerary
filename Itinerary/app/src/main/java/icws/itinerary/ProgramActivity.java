@@ -1,8 +1,10 @@
 package icws.itinerary;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -26,6 +28,8 @@ public class ProgramActivity extends Activity {
     //Radio
     private RadioGroup radioViewGroup;
 
+    //progress dialog
+    private ProgressDialog progressDialog;
     //database
     private SQLiteDatabase database;
     private ExternalDbOpenHelper externalDbOpenHelper;
@@ -83,10 +87,17 @@ public class ProgramActivity extends Activity {
         addListenerOnButton();
 
 
-        // test initialization
-        contentFiller.populateContainer();
-        contentFiller.populateContainer_room();
+        new Load().execute();
+//        // test initialization
+//        contentFiller.populateContainer();
+//        contentFiller.populateContainer_room();
 
+//        drawList();
+
+    }
+
+
+    private void drawList(){
         firstLevelLinearLayout = (LinearLayout) findViewById(R.id.linear_listview);
         if (isViewByTime) {
 
@@ -176,25 +187,6 @@ public class ProgramActivity extends Activity {
                         // set session id (database) as tag
                         checkBox.setTag(session);
                         // click event
-                        /*checkBox.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                            CheckBox checkBox = (CheckBox) v;
-                                Session session=(Session)checkBox.getTag();
-                                Toast.makeText(getApplicationContext(),
-                                        "Session ID in database: " + session.get_id(), Toast.LENGTH_SHORT).show();
-                                if(checkBox.isChecked()){
-                                    session.setSessionSelected("1");
-                                    //for database update
-                                    contentFiller.updateSessionSelected(session.get_id(), "1");
-                                }else{
-                                    session.setSessionSelected("0");
-                                    contentFiller.updateSessionSelected(session.get_id(), "0");
-                                    //for database update
-                                }
-                            }
-                        });*/
-
                         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                             @Override
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -372,7 +364,6 @@ public class ProgramActivity extends Activity {
         }
     }
 
-
     //Radio Button onClick
 
     public void addListenerOnButton() {
@@ -416,5 +407,32 @@ public class ProgramActivity extends Activity {
         });
     }
 
+    class Load extends AsyncTask<String, String, String>{
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(ProgramActivity.this);
+            progressDialog.setMessage("loading Program");
+            progressDialog.setIndeterminate(false);
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            // test initialization
+            contentFiller.populateContainer();
+            contentFiller.populateContainer_room();
+            return null;
+
+        }
+        @Override
+        protected void onPostExecute(String file_url){
+            progressDialog.dismiss();
+            drawList();
+        }
+    }
 
 }

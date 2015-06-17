@@ -1,6 +1,7 @@
 package icws.itinerary;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +32,8 @@ public class NotificationActivity extends ListActivity implements ProcessJSONInt
     private BroadcastReceiver receiver;
 
     private NotificationList notificationArrayList;
-
+    //progress dialog
+    private ProgressDialog progressDialog;
     private NoticeListAdapter myAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,5 +139,7 @@ public class NotificationActivity extends ListActivity implements ProcessJSONInt
         }
 
     }
+
+
 
 }

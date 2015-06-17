@@ -48,7 +48,7 @@ public class Index extends Activity {
 //        ClickInterface click = IntentFactory.goToNext(this, EventPost.class,null,null);
 //    }
     public void goPostNotification(View v){
-        boolean committeeFlag=true;
+        boolean committeeFlag=false;
         if(committeeFlag){
             ClickInterface click = IntentFactory.goToNext(this,PostNotification.class,null,null);
         }else{

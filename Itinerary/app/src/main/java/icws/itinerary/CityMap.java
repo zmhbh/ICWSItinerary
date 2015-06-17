@@ -1,9 +1,11 @@
 package icws.itinerary;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.*;
@@ -29,33 +31,31 @@ public class CityMap extends Activity {
     static final int REQUEST_CODE_RECOVER_PLAY_SERVICES = 1001;
     static final int REQUEST_CODE_PICK_ACCOUNT = 1002;
 
+    //progress dialog
+    private ProgressDialog progressDialog;
+
     private LocationManager locationManager;
     private GoogleMap googleMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_map);
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        // check if enabled and if not send user to the GSP settings
-        // Better solution would be to display a dialog and suggesting to
-        // go to the settings
-        if (!enabled) {
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-        }
 
 
+        new Load().execute();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
+
+        createMapView();
+        addMarker();
         //&&checkUserAccount()
-        if(checkPlayServices()){
-            createMapView();
-            addMarker();
-        }
+//        if(checkPlayServices()){
+//            createMapView();
+//            addMarker();
+//        }
     }
     private boolean checkPlayServices() {
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -185,6 +185,45 @@ public class CityMap extends Activity {
                             .draggable(true)
             );
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,14));
+        }
+    }
+
+
+    class Load extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(CityMap.this);
+            progressDialog.setMessage("loading Map");
+            progressDialog.setIndeterminate(false);
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            // test initialization
+            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            // check if enabled and if not send user to the GSP settings
+            // Better solution would be to display a dialog and suggesting to
+            // go to the settings
+            if (!enabled) {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+            checkPlayServices();
+
+            return null;
+
+        }
+        @Override
+        protected void onPostExecute(String file_url){
+
+            progressDialog.dismiss();
+
         }
     }
 }
