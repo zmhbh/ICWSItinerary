@@ -1,13 +1,11 @@
 package icws.itinerary;
 
 import android.content.Intent;
+import android.location.Criteria;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.support.v4.app.FragmentActivity;
 import android.widget.*;
 import android.util.Log;
 import com.google.android.gms.maps.*;
@@ -15,17 +13,30 @@ import com.google.android.gms.maps.model.*;
 import android.app.Activity;
 import android.view.View;
 import android.location.Location;
+import utility.AccountUtils;
+import android.accounts.Account;
 
+import android.accounts.AccountManager;
+
+import android.widget.Toast;
+
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.common.AccountPicker;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class CityMap extends Activity {
+    static final int REQUEST_CODE_RECOVER_PLAY_SERVICES = 1001;
+    static final int REQUEST_CODE_PICK_ACCOUNT = 1002;
 
+    private LocationManager locationManager;
     private GoogleMap googleMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_map);
-        LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-        boolean enabled = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         // check if enabled and if not send user to the GSP settings
         // Better solution would be to display a dialog and suggesting to
         // go to the settings
@@ -34,49 +45,101 @@ public class CityMap extends Activity {
             startActivity(intent);
         }
 
-        createMapView();
-        addMarker();
-//        double lat = 37.403146;
-//        double lng= -122.075382;
-//        LatLng latlng = new LatLng(lat, lng);
-//        SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-//        map = fm.getMap();
-       // map=((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-        //map.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,14));
+
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_city_map, menu);
+    protected void onResume(){
+        super.onResume();
+        //&&checkUserAccount()
+        if(checkPlayServices()){
+            createMapView();
+            addMarker();
+        }
+    }
+    private boolean checkPlayServices() {
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (status != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(status)) {
+                showErrorDialog(status);
+            } else {
+                Toast.makeText(this, "This device is not supported.", Toast.LENGTH_LONG).show();
+                finish();
+            }
+            return false;
+        }
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    void showErrorDialog(int code) {
+        GooglePlayServicesUtil.getErrorDialog(code, this, REQUEST_CODE_RECOVER_PLAY_SERVICES).show();
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    private boolean checkUserAccount() {
+        String accountName = AccountUtils.getAccountName(this);
+        if (accountName == null) {
+            // Then the user was not found in the SharedPreferences. Either the
+            // application deliberately removed the account, or the application's
+            // data has been forcefully erased.
+            showAccountPicker();
+            return false;
         }
 
-        return super.onOptionsItemSelected(item);
+        Account account = AccountUtils.getGoogleAccountByName(this, accountName);
+        if (account == null) {
+            // Then the account has since been removed.
+            AccountUtils.removeAccount(this);
+            showAccountPicker();
+            return false;
+        }
+
+        return true;
     }
+
+    private void showAccountPicker() {
+        Intent pickAccountIntent = AccountPicker.newChooseAccountIntent(null, null,
+                new String[] { GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE }, true, null, null, null, null);
+        startActivityForResult(pickAccountIntent, REQUEST_CODE_PICK_ACCOUNT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_CODE_RECOVER_PLAY_SERVICES:
+                if (resultCode == RESULT_CANCELED) {
+                    Toast.makeText(this, "Google Play Services must be installed and up-to-date.",
+                            Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                return;
+            case REQUEST_CODE_PICK_ACCOUNT:
+                if (resultCode == RESULT_OK) {
+                    String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+                    AccountUtils.setAccountName(this, accountName);
+                } else if (resultCode == RESULT_CANCELED) {
+                    Toast.makeText(this, "This application requires a Google account.",
+                            Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
     // Route Button
     public void goGoogleMaps(View v){
-        String destination = "5000 Forbes Avenue, Pittsburgh, PA 15213";
+        String destination = "Millennium Broadway Hotel 145 West 44th Street, New York, NY 10036";
        googleMap.setMyLocationEnabled(true);
-        Location userLocation = googleMap.getMyLocation();
-        if (userLocation==null)
+        //Location userLocation = googleMap.getMyLocation();
+        Criteria criteria =new Criteria();
+        String provider=locationManager.getBestProvider(criteria,false);
+        Location location = locationManager.getLastKnownLocation(provider);
+        if (location==null)
         Toast.makeText(getApplicationContext(),
                 "error",Toast.LENGTH_SHORT).show();
         final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http:/a/maps.google.com/maps?"
-                + "saddr="+ 37.422006+","+ -122.084095 + "&daddr="+destination));
+                + "saddr="+ location.getLatitude()+","+ location.getLongitude() + "&daddr="+destination));
 
         intent.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
 
@@ -114,10 +177,11 @@ public class CityMap extends Activity {
 
         /** Make sure that the map has been initialised **/
         if(null != googleMap){
-            LatLng latlng = new LatLng(37.403146, -122.075382);
+            LatLng latlng = new LatLng(40.757116, -73.984865);
             googleMap.addMarker(new MarkerOptions()
                             .position(latlng)
-                            .title("777 W Middlefield Rd, #71")
+                            .title("Millennium Broadway Hotel")
+                            .snippet("145 West 44th Street, New York")
                             .draggable(true)
             );
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,14));

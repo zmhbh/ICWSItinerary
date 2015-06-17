@@ -28,7 +28,7 @@ import java.util.jar.Attributes;
  * Created by zmhbh on 6/14/15.
  */
 public class JSONRequest extends IntentService {
-    private final static String webServiceUrl = "http://10.0.0.18:8080/ICWSWebService/";
+    private final static String webServiceUrl = "http://www.codeee.com:8080/ICWSWebService/";
 
     ///////////////
     public static final String IN_MSG = "requestType";
